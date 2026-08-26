@@ -1,0 +1,33 @@
+### 일반 회원가입
+POST http://localhost:8080/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password",
+  "name": "User",
+  "pushAgreed": true
+}
+
+### 일반 로그인
+POST http://localhost:8080/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password",
+  "deviceInfo": {
+    "deviceId": "your_deviceId_here",
+    "deviceType": "IOS",
+    "deviceName": "IPHONE 16"
+  }
+}
+
+### 토큰 재발급
+POST http://localhost:8080/auth/reissue
+
+Bearer your_refreshToken_here
+
+### 로그아웃
+POST http://localhost:8080/auth/sign-out
+Authorization: Bearer your_accessToken_here

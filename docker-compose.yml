@@ -1,0 +1,41 @@
+name: playground-auth
+
+x-common-service: &common-service
+  restart: unless-stopped
+  networks:
+    - my-network
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
+  environment:
+    TZ: Asia/Seoul
+  env_file:
+    - .env.local
+
+services:
+  auth-gateway:
+    <<: *common-service
+    container_name: auth-gateway
+    build: ./auth-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      user-service:
+        condition: service_healthy
+
+  user-service:
+    <<: *common-service
+    container_name: user-service
+    build: ./user-service
+    ports:
+      - "8081:8080"
+
+# ⚠️ Requirements
+# 1. MySQL container must be running
+# 2. Redis container must be running
+# 3. Docker network `my-network` must exist
+networks:
+  my-network:
+    external: true

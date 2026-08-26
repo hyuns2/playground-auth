@@ -1,0 +1,38 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: ${USER-SERVICE_URI}
+              predicates:
+                - Path=/user/**
+              filters:
+                - StripPrefix=1
+          default-filters:
+            - PreserveHostHeader
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedHeaders:
+                  - "*"
+                allowedOrigins:
+                  - "*"
+                allowedMethods:
+                  - "*"
+
+logging:
+  level:
+    root: INFO
+    io.playground: ${LOGGING_LEVEL_PROJECT}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

@@ -1,0 +1,28 @@
+### 일반 회원가입
+POST http://localhost:8080/user/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password",
+  "name": "User",
+  "pushAgreed": true
+}
+
+### 일반 로그인
+POST http://localhost:8080/user/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password",
+  "deviceInfo": {
+    "deviceId": "your_deviceId_here",
+    "deviceType": "IOS",
+    "deviceName": "IPHONE 16"
+  }
+}
+
+### 인증 통과 확인용
+GET http://localhost:8080/user
+Authorization: Bearer your_accessToken_here

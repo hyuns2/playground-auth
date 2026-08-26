@@ -1,0 +1,44 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  threads:
+    virtual:
+      enabled: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB-USER}
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_HIBERNATE_DDL-AUTO}
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+        jdbc:
+          time_zone: UTC
+    defer-datasource-initialization: true
+
+logging:
+  level:
+    root: INFO
+    io.playground: ${LOGGING_LEVEL_PROJECT}
+
+    org.hibernate.SQL: ${LOGGING_LEVEL_HIBERNATE-SQL}
+    org.hibernate.orm.jdbc.bind: ${LOGGING_LEVEL_HIBERNATE-JDBC}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health

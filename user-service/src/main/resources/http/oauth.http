@@ -1,0 +1,12 @@
+### 소셜 로그인 (구글, 네이버)
+GET http://localhost:8080/oauth-login.html
+
+### 추가 정보 입력
+POST http://localhost:8080/oauth2/wrap-up
+Content-Type: application/json
+Authorization: Bearer your_accessToken_here
+
+{
+  "name": "OAuth User",
+  "pushAgreed": true
+}

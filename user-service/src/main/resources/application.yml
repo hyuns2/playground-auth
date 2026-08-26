@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: user-service
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE}
+    include:
+      - secret
+      - policy

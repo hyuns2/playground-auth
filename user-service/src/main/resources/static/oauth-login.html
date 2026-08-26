@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAuth2 Login</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #f6f7fb;
+      color: #111827;
+    }
+
+    .card {
+      width: min(100%, 420px);
+      margin: 24px;
+      padding: 24px;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    input, select, button {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #93c5fd;
+      border-color: #60a5fa;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: 0;
+      background: #111827;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    button.google {
+      background: #4285f4;
+    }
+
+    button.naver {
+      background: #03c75a;
+    }
+
+    .message {
+      margin-top: 14px;
+      min-height: 20px;
+      font-size: 14px;
+      color: #dc2626;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+<main class="card">
+  <h1>OAuth2 로그인</h1>
+  <p>기기 정보를 입력하고 구글 또는 네이버 로그인 버튼을 눌러주세요.</p>
+
+  <form id="oauthForm">
+    <label for="deviceId">Device ID</label>
+    <input id="deviceId" name="deviceId" type="text" placeholder="your-deviceId-here">
+
+    <div class="row">
+      <div>
+        <label for="deviceType">Device Type</label>
+        <select id="deviceType" name="deviceType">
+          <option value="IOS">IOS</option>
+          <option value="ANDROID">ANDROID</option>
+          <option value="WEB">WEB</option>
+        </select>
+      </div>
+      <div>
+        <label for="deviceName">Device Name</label>
+        <input id="deviceName" name="deviceName" type="text" placeholder="your-deviceName-here">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="google" data-provider="google">Google로 로그인</button>
+      <button type="submit" class="naver" data-provider="naver">Naver로 로그인</button>
+    </div>
+  </form>
+
+  <div id="message" class="message"></div>
+  <div class="hint">이 페이지는 OAuth2 제공 서버로 JSON을 보내고, 응답의 redirect 문자열을 따라갑니다.</div>
+</main>
+
+<script>
+  const form = document.getElementById('oauthForm');
+  const message = document.getElementById('message');
+  let selectedProvider = 'google';
+
+  form.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-provider]');
+    if (!button) {
+      return;
+    }
+
+    selectedProvider = button.dataset.provider;
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    message.textContent = '';
+
+    const deviceInfo = {};
+    const deviceId = document.getElementById('deviceId').value.trim();
+    const deviceType = document.getElementById('deviceType').value.trim();
+    const deviceName = document.getElementById('deviceName').value.trim();
+
+    if (deviceId) {
+      deviceInfo.deviceId = deviceId;
+    }
+
+    if (deviceType) {
+      deviceInfo.deviceType = deviceType;
+    }
+
+    if (deviceName) {
+      deviceInfo.deviceName = deviceName;
+    }
+
+    window.location.href = '/user/oauth2/authorization/' + selectedProvider +
+            '?deviceInfo=' + encodeURIComponent(JSON.stringify(deviceInfo));
+  });
+</script>
+</body>
+</html>

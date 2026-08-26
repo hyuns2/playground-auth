@@ -5,12 +5,6 @@
 
 `Gateway` · `Spring Security` · `JWT` · `OAuth2` · `Github Packages`
 
----
-
-## 🎯 
-
----
-
 ## 🛠️ 기술 스택
 
 | 분류        | 사용                                      |
@@ -22,8 +16,6 @@
 | Persistence | MySQL 9, Spring Data JPA                  |
 | Cache       | Redis 7, Spring Data Redis                |
 | Infra       | Gradle 9, Docker Compose, Github Packages |
-
----
 
 ## 🏗️ 프로젝트 구조 및 설명
 
@@ -46,8 +38,6 @@ playground-auth/
   - 2종의 소셜 로그인 지원 (Google, Naver)
   - 소셜 회원가입 후, 추가 정보 입력해야 서비스 사용 가능
 * [기술적 의사결정 과정](https://hyuns2.notion.site/playground-auth-3a32ac90a22f8024ac57efbf52239ac5)
-
----
 
 ## 🚀 실행 방법
 

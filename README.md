@@ -15,7 +15,7 @@
 | Security    | Spring Security, JWT, OAuth2 Client       |
 | Persistence | MySQL 9, Spring Data JPA                  |
 | Cache       | Redis 7, Spring Data Redis                |
-| Infra       | Gradle 9, Docker Compose, Github Packages |
+| Infra       | Docker · Docker Compose, Github Packages  |
 
 ## 🏗️ 프로젝트 구조 및 설명
 

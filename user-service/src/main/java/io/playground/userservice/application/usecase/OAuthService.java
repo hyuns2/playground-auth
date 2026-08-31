@@ -11,7 +11,7 @@ import io.playground.userservice.exception.BusinessErrorCode;
 import io.playground.userservice.exception.BusinessException;
 import io.playground.userservice.infrastructure.jwt.model.AuthPrincipal;
 import io.playground.userservice.infrastructure.jwt.model.JwtToken;
-import io.playground.userservice.infrastructure.jwt.provider.JwtTokenService;
+import io.playground.userservice.infrastructure.jwt.service.JwtTokenService;
 import io.playground.userservice.infrastructure.security.dto.GoogleUserInfo;
 import io.playground.userservice.infrastructure.security.dto.NaverUserInfo;
 import io.playground.userservice.infrastructure.security.dto.OAuthUser;

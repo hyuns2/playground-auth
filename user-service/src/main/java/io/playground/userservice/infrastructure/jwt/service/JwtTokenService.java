@@ -69,14 +69,20 @@ public class JwtTokenService {
                 )
                 .claim(TOKEN_TYPE_CLAIM, tokenType)
                 .expiration(
-                        tokenType.equals("REFRESH") ?
-                                new Date(
-                                        System.currentTimeMillis() +
-                                                jwtProperties.getRefreshExp()
+                        tokenType.equals("ACCESS") ?
+                                Date.from(
+                                        Instant.now()
+                                                .plus(
+                                                        jwtProperties.getAccessExp(),
+                                                        ChronoUnit.MILLIS
+                                                )
                                 ) :
-                                new Date(
-                                        System.currentTimeMillis() +
-                                                jwtProperties.getAccessExp()
+                                Date.from(
+                                        Instant.now()
+                                                .plus(
+                                                        jwtProperties.getRefreshExp(),
+                                                        ChronoUnit.MILLIS
+                                                )
                                 )
                 )
                 .signWith(key)

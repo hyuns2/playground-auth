@@ -7,15 +7,15 @@
 
 ## 🛠️ 기술 스택
 
-| 분류        | 사용                                      |
-|-------------|-------------------------------------------|
-| Language    | Java 25                                   |
-| Framework   | Spring Boot 4, Spring Cloud Gateway       |
-| Build       | Gradle 9 · Kotlin DSL                     |
-| Security    | Spring Security, JWT, OAuth2 Client       |
-| Persistence | MySQL 9, Spring Data JPA                  |
-| Cache       | Redis 7, Spring Data Redis                |
-| Infra       | Docker · Docker Compose, Github Packages  |
+| 분류        | 사용                                     |
+|-------------|------------------------------------------|
+| Language    | Java 25                                  |
+| Framework   | Spring Boot 4, Spring Cloud Gateway      |
+| Build       | Gradle 9 · Kotlin DSL                    |
+| Security    | Spring Security, JWT, OAuth2 Client      |
+| Persistence | MySQL 9, Spring Data JPA                 |
+| Cache       | Redis 7, Spring Data Redis               |
+| Infra       | Docker · Docker Compose, Github Packages |
 
 ## 🏗️ 프로젝트 구조 및 설명
 

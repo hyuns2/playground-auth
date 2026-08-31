@@ -22,16 +22,16 @@ public class UserStatusAuthorizationManager implements AuthorizationManager<Requ
     public @Nullable AuthorizationResult authorize(Supplier<? extends @Nullable Authentication> authentication,
                                                    RequestAuthorizationContext object) {
         Authentication auth = authentication.get();
-        if (auth == null)
-            return new AuthorizationDecision(false);
-
-        AuthPrincipal principal = (AuthPrincipal) auth.getPrincipal();
-        if (principal == null)
+        if (
+                auth == null ||
+                        !(auth.getPrincipal() instanceof
+                                AuthPrincipal authPrincipal)
+        )
             return new AuthorizationDecision(false);
 
         return new AuthorizationDecision(
                         allowedStatuses.contains(
-                                principal.status()
+                                authPrincipal.status()
                         )
                 );
     }

@@ -11,16 +11,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 
+import javax.crypto.SecretKey;
+
 @Configuration(proxyBeanMethods = false)
 public class JwtConfig {
     @Bean
     @ConditionalOnMissingBean
-    public JwtTokenParser jwtTokenParser(@Value("${auth.jwt.secret-key}") String secretKey,
+    public SecretKey getKey(@Value("${auth.jwt.secret-key}") String secretKey) {
+        return Keys.hmacShaKeyFor(
+                Decoders.BASE64
+                        .decode(secretKey)
+        );
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public JwtTokenParser jwtTokenParser(SecretKey key,
                                          @Value("${auth.jwt.grant-type}") String grantType) {
         return new JwtTokenParser(
-                Keys.hmacShaKeyFor(
-                        Decoders.BASE64.decode(secretKey)
-                ),
+                key,
                 grantType
         );
     }

@@ -28,7 +28,8 @@ public class JwtTokenParser {
     public JwtTokenParser(@Value("${auth.jwt.secret-key}") String secretKey,
                           @Value("${auth.jwt.grant-type}") String grantType) {
         this.key = Keys.hmacShaKeyFor(
-                Decoders.BASE64.decode(secretKey)
+                Decoders.BASE64
+                        .decode(secretKey)
         );
         this.grantType = grantType;
     }

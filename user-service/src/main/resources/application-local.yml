@@ -9,7 +9,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB-USER}
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${USER_DB}
     username: ${MYSQL_USERNAME}
     password: ${MYSQL_PASSWORD}
 
@@ -20,7 +20,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: ${JPA_HIBERNATE_DDL-AUTO}
+      ddl-auto: ${JPA_HIBERNATE_DDL_AUTO}
     properties:
       hibernate:
         format_sql: true
@@ -34,8 +34,8 @@ logging:
     root: INFO
     io.playground: ${LOGGING_LEVEL_PROJECT}
 
-    org.hibernate.SQL: ${LOGGING_LEVEL_HIBERNATE-SQL}
-    org.hibernate.orm.jdbc.bind: ${LOGGING_LEVEL_HIBERNATE-JDBC}
+    org.hibernate.SQL: ${LOGGING_LEVEL_HIBERNATE_SQL}
+    org.hibernate.orm.jdbc.bind: ${LOGGING_LEVEL_HIBERNATE_JDBC}
 
 management:
   endpoints:

@@ -1,7 +1,6 @@
 package io.playground.securitycore.jwt;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwe;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -65,10 +64,9 @@ public class JwtTokenParser {
     private Claims parseClaims(String token) {
         try {
             return Jwts.parser()
-                    .decryptWith(key)
+                    .verifyWith(key)
                     .build()
-                    .parse(token)
-                    .accept(Jwe.CLAIMS)
+                    .parseSignedClaims(token)
                     .getPayload();
         } catch (Exception e) {
             throw new BadCredentialsException(
